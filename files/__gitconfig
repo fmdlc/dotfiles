@@ -1,0 +1,62 @@
+[user]
+  email = fmdlc.unix@gmail.com
+  name = Facu de la Cruz
+  signingkey = 95A6C65F0BC6BF647AF386866C9E5CCCF742C8CA
+
+[alias]
+  co = checkout
+  st = status
+  br = branch
+  ci = commit
+  re = reflog --relative-date
+  lo = log --graph --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+
+[core]
+  editor = vim
+  excludesfile = /Users/tty0/.gitignore_global
+	autocrlf = false
+	pager = diff-so-fancy | less --tabs=4 -RFX
+
+[color]
+  ui = true
+
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = red
+
+[credential]
+  helper = osxkeychain
+
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+
+[gpg]
+  program = gpg
+
+[commit]
+  gpgsign = true
+
+[pull]
+  rebase = false
+
+[gitsh]
+  defaultcommand = status -sb
+  gitcommand = hub
+  nogreeting = true
+  prompt = "\n%D %c(%b%#)%w ➜"

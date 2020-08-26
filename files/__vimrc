@@ -1,0 +1,289 @@
+" vim:set ts=2 sts=2 sw=2 expandtab:
+autocmd!
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BASIC EDITING CONFIGURATION
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set autoindent
+set backspace=2
+set backspace=indent,eol,start
+set backupdir=/tmp/
+set bg=dark
+set clipboard=unnamed
+set completeopt=longest,menuone
+set copyindent
+set cursorline
+set directory=/tmp/
+set expandtab
+set foldmethod=marker
+set foldnestmax=1
+set history=10000
+set hlsearch
+set ignorecase smartcase
+set incsearch
+set laststatus=2
+set mouse=a
+set nocompatible
+set noerrorbells
+set nu
+set scrolloff=3
+set shiftwidth=2
+set showcmd
+set showmatch
+set showtabline=2
+set softtabstop=2
+set splitbelow
+set splitright
+set t_ti= t_te=
+set title
+set ts=2
+set ttyfast
+set undodir=$HOME/.vim/undo//
+set undofile
+set undolevels=1000
+set winwidth=80
+set wildmenu
+set wildmode=longest:full,full
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.terraform
+"set list
+"set listchars=tab:>.,trail:.,extends:#,nbsp:.
+"set lcs+=space:
+
+" Redefines background and foreground colors for VimDiff
+hi DiffAdd      ctermfg=NONE          ctermbg=Green
+hi DiffChange   ctermfg=NONE          ctermbg=NONE
+hi DiffDelete   ctermfg=LightBlue     ctermbg=Red
+hi DiffText     ctermfg=Yellow        ctermbg=Red
+
+hi Search guibg=LightBlue
+highlight ErrorMsg guibg=White guifg=Red
+
+filetype on
+filetype plugin indent on
+filetype plugin on
+
+" Remap leader
+let mapleader = ","
+
+" Specify a directory for plugins
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
+  Plug 'tpope/vim-fugitive'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'w0rp/ale'
+  Plug 'tpope/vim-surround'
+  Plug 'hashivim/vim-terraform'
+  Plug 'xuyuanp/nerdtree-git-plugin'
+  Plug 'kyoz/purify', { 'rtp': 'vim' }
+  Plug 'frazrepo/vim-rainbow'
+  Plug 'preservim/nerdcommenter'
+  Plug 'zivyangll/git-blame.vim'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'towolf/vim-helm'
+  Plug 'kkvh/vim-docker-tools'
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
+  Plug 'tarekbecker/vim-yaml-formatter'
+  Plug 'davidbeckingsale/writegood.vim'
+  Plug 'bling/vim-bufferline'
+  Plug 'dhruvasagar/vim-table-mode'
+  Plug 'https://github.com/kien/ctrlp.vim.git'
+call plug#end()
+
+" Theme configuration
+if &term == "screen"
+    set t_Co=256
+endif
+let &t_AB="\e[48;5;%dm"
+let &t_AF="\e[38;5;%dm"
+
+syntax enable
+colorscheme ir_black
+
+" netrw
+let g:netrw_altv = 1
+let g:netrw_banner = 0
+let g:netrw_browse_split = 3
+let g:netrw_liststyle = 3
+let g:netrw_winsize = 25
+
+" YAML Formatter
+let g:yaml_formatter_indent_collection=1
+
+" Nerdtree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+function! StartUp()
+    if 0 == argc()
+        NERDTree
+    end
+endfunction
+
+autocmd VimEnter * call StartUp()
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Ignored"   : "☒",
+    \ "Unknown"   : "?"
+    \ }
+
+let g:NERDTreeFileExtensionHighlightFullName = 1
+map <C-n> :NERDTreeToggle<CR>
+map <C-p> :Files<CR>
+
+" fuzzyfinder
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+let g:terraform_align=1
+let g:terraform_fmt_on_save = 1
+let g:terraform_align = 1
+
+" Rainbow
+let g:rainbow_active = 1
+
+" NerdComment
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
+let g:NERDToggleCheckAllLines = 1
+let NERDTreeQuitOnOpen = 1
+let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+
+" ALE
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_keep_list_window_open = 0
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_list_window_size = 5
+let g:ale_open_list = 1
+let g:ale_set_highlights = 0
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
+let g:indentLine_char = '⦙'
+
+" Airline
+let g:airline_statusline_ontop=1
+let g:airline_theme='bubblegum'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#buffers_label = 'b'
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#keymap_ignored_filetypes = ['vimfiler', 'nerdtree']
+let g:airline#extensions#tabline#overflow_marker = '…'
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#show_close_button = 1
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#show_tab_nr = 0
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#show_tabs = 0
+let g:airline#extensions#tabline#switch_buffers_and_tabs = 0
+let g:airline#extensions#tabline#tabs_label = 't'
+let g:airline#extensions#tabline#ignore_bufadd_pat =
+  \ 'gundo|undotree|vimfiler|tagbar|nerd_tree|startify|!'
+
+" Snippets
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" Mappings
+nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
+nnoremap <Leader>gd :Gdiff<cr>
+nnoremap <Leader>gb :Gblame<cr>
+nnoremap <Leader>gD <c-w>h<c-w>c
+nnoremap <leader>S :term<CR>
+nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <Leader>d :DockerToolsOpen<CR>
+nnoremap <Leader>D :DockerToolsClose<CR>
+nnoremap <Leader>n :tabnext<CR>
+nnoremap <Leader>b :tabprevious<CR>
+nnoremap <silent> <Leader>v :NERDTreeFind<CR>
+nnoremap <C-f> :FZF<CR>
+nnoremap <Leader>l :bp<CR>
+nnoremap <Leader>h :bn<CR>
+nnoremap <Leader>g :e#<CR>
+nnoremap <Leader>1 :1b<CR>
+nnoremap <Leader>2 :2b<CR>
+nnoremap <Leader>3 :3b<CR>
+nnoremap <Leader>4 :4b<CR>
+nnoremap <Leader>5 :5b<CR>
+nnoremap <Leader>6 :6b<CR>
+nnoremap <Leader>7 :7b<CR>
+nnoremap <Leader>8 :8b<CR>
+nnoremap <Leader>9 :9b<CR>
+nnoremap <Leader>0 :10b<CR>
+
+map <Leader><up> <C-w><up>
+map <Leader><down> <C-w><down>
+map <Leader><left> <C-w><left>
+map <Leader><right> <C-w><right>
+map w!! w !sudo tee % >/dev/null
+
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd CompleteDone * if !pumvisible() | pclose | endif
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType json setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType py   setlocal ts=2 sts=2 sw=2 expandtab
+
+augroup CloseLoclistWindowGroup
+    autocmd!
+    autocmd QuitPre * if empty(&buftype) | lclose | endif
+augroup END
+
+" Autoload ~/.vimrc
+augroup myvimrchooks
+  au!
+  autocmd bufwritepost .vimrc source ~/.vimrc
+augroup END
+
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+" InsertTime COMMAND
+command! InsertTime :normal a<c-r>=strftime('%F %H:%M:%S.0 %z')<cr>
+
+" Remove trailing white spaces when :w is issued
+autocmd BufWritePre * %s/\s\+$//e
+
+"  Clearing highlighted searches
+nmap <silent> ./ :nohlsearch<CR>
+
+function! s:isAtStartOfLine(mapping)
+  let text_before_cursor = getline('.')[0 : col('.')-1]
+  let mapping_pattern = '\V' . escape(a:mapping, '\')
+  let comment_pattern = '\V' . escape(substitute(&l:commentstring, '%s.*$', '', ''), '\')
+  return (text_before_cursor =~? '^' . ('\v(' . comment_pattern . '\v)?') . '\s*\v' . mapping_pattern . '\v$')
+endfunction
+
+inoreabbrev <expr> <bar><bar>
+          \ <SID>isAtStartOfLine('\|\|') ?
+          \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
+inoreabbrev <expr> __
+          \ <SID>isAtStartOfLine('__') ?
+          \ '<c-o>:silent! TableModeDisable<cr>' : '__'
+

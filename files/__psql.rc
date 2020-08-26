@@ -1,0 +1,29 @@
+-- Be quiet
+-- \set QUIET 1
+
+-- Custom prompt options
+\set PROMPT1 '%[%033[32;2m%](%[%033[0;37m%]%/%[%033[32;2m%])%[%033[33;1m%]%R%[%033[37;2m%]%#%[%033[0m%] '
+\set PROMPT2 ' %[%033[33;1m%]%R%[%033[37;2m%]%#%[%033[0m%] '
+
+-- Line style (I selected unicode codification)
+\pset linestyle unicode
+
+-- Complete SQL keywords in uppercase
+\set COMP_KEYWORD_CASE upper
+
+-- History control
+\set HISTCONTROL ignoredups
+\set HISTSIZE 2000
+\set HISTFILE ~/.psql_history- :HOST - :DBNAME
+
+-- Replace null chracaters for "[null]" string.
+\pset null [null]
+
+-- Always use pager to display long results
+\pset pager always
+
+-- Extended display mode
+\x auto
+
+-- Show timming after query execution
+-- \timing
