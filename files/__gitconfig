@@ -4,13 +4,11 @@
   signingkey = 95A6C65F0BC6BF647AF386866C9E5CCCF742C8CA
 
 [alias]
-  co = checkout
+  glog = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
   st = status
-  br = branch
-  ci = commit
-  re = reflog --relative-date
-  lo = log --graph --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+  stash-all = stash save --include-untracked
+  prune = fetch --prune
+  undo = reset --soft HEAD^
 
 [core]
   editor = vim
@@ -49,14 +47,28 @@
 [gpg]
   program = gpg
 
+[status]
+  showUntrackedFiles = all
+
 [commit]
   gpgsign = true
+	template = /Users/tty0/.git-template/commit_msg
+
+[merge]
+  ff = only
 
 [pull]
   rebase = false
+
+[push]
+  default = simple
+  followTags = true
 
 [gitsh]
   defaultcommand = status -sb
   gitcommand = hub
   nogreeting = true
   prompt = "\n%D %c(%b%#)%w ➜"
+
+[init]
+	templateDir = /Users/tty0/.git-template

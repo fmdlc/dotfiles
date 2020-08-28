@@ -32,6 +32,7 @@ It will copy all the prefixed `__` files into your `$HOME` directory
 |`__curlrc`| cURL configuration.
 |`__fzf.zsh`| FuzzyFinder configuration for ZSH
 |`__gitconfig`| git global configuration.
+|`__git-template`| Several templates and hooks.
 |`__hushlogin`| Avoid `'Last login: Mon June 1 …'`
 |`__gitignore_global`| git ignorer global configuration.
 |`__irssi.conf`| Irssi configuration.
