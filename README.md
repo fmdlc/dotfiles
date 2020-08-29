@@ -9,21 +9,22 @@ My personal dotfiles, all in one place.
 
 Setup ZSH as your login shell:
 ``` bash
-chsh -s $(which zsh)
+$: chsh -s $(which zsh)
 ```
 
 Clone this repository and inside the created directory, execute:
 
 > ⚠️ **DO NOT** run the setup snippet if you do not fully understand what it does.
-```bah
+```bash
 $: curl -sS https://raw.githubusercontent.com/fmdlc/dotfiles/master/bootstrap.sh | bash
 ```
 
-> If you prefer running it manually:
+If you prefer running it manually:
 ```bash
 $: ./bootstrap --dry-run
 ```
-> And if everything is working as expected:
+
+And if everything is working as expected:
 ```bash
 $: ./bootstrap
 ```
