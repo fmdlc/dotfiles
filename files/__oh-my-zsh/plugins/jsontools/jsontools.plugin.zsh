@@ -15,9 +15,9 @@ elif [[ $(whence python) != "" && ( "x$JSONTOOLS_METHOD" = "x" || "x$JSONTOOLS_M
 	alias is_json='python -c "
 import sys; del sys.path[0];
 import json;
-try: 
+try:
 	json.loads(sys.stdin.read())
-except ValueError, e: 
+except ValueError, e:
 	print False
 else:
 	print True

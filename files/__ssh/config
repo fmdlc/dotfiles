@@ -1,0 +1,14 @@
+SendEnv EDITOR LANG VISUAL
+ControlPath /tmp/ssh_%h
+ControlPersist 10h
+EscapeChar ~
+
+Host *
+	UseKeychain yes
+	Compression yes
+	VisualHostKey no
+	ControlMaster auto
+	ControlPath ~/.ssh/controlmasters/%r@%h:%p
+	TCPKeepAlive yes
+	Protocol 2
+	ServerAliveInterval 120

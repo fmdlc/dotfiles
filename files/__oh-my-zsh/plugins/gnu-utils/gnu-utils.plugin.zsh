@@ -17,7 +17,7 @@ __gnu_utils() {
   local cmd
   local prefix
 
-  # coreutils 
+  # coreutils
   gcmds=('g[' 'gbase64' 'gbasename' 'gcat' 'gchcon' 'gchgrp' 'gchmod'
   'gchown' 'gchroot' 'gcksum' 'gcomm' 'gcp' 'gcsplit' 'gcut' 'gdate'
   'gdd' 'gdf' 'gdir' 'gdircolors' 'gdirname' 'gdu' 'gecho' 'genv' 'gexpand'
@@ -41,9 +41,9 @@ __gnu_utils() {
   for gcmd in "${gcmds[@]}"; do
     # Do nothing if the command isn't found
     (( ${+commands[$gcmd]} )) || continue
-    
+
     # This method allows for builtin commands to be primary but it's
-    # lost if hash -r or rehash -f is executed. Thus, those two 
+    # lost if hash -r or rehash -f is executed. Thus, those two
     # functions have to be wrapped.
     #
     hash ${gcmd[2,-1]}=${commands[$gcmd]}

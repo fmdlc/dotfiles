@@ -27,7 +27,7 @@ function die() {
 function read_base64_stanza() {
   value=""
   while read line;
-  do 
+  do
     if [ "$line" == "" ]; then
       break
     fi

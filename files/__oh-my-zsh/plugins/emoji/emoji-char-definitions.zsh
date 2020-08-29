@@ -5,7 +5,7 @@
 #
 # This contains the definition for:
 #   $emoji         - which maps character names to Unicode characters
-#   $emoji_flags   - maps country names to Unicode flag characters using region indicators 
+#   $emoji_flags   - maps country names to Unicode flag characters using region indicators
 
 # Main emoji
 typeset -gAH emoji

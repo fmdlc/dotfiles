@@ -17,7 +17,7 @@ if s:moria_style == "black" || s:moria_style == "dark" || s:moria_style == "dark
 elseif s:moria_style == "light" || s:moria_style == "white"
     set background=light
 else
-    let s:moria_style = &background 
+    let s:moria_style = &background
 endif
 
 hi clear
@@ -130,7 +130,7 @@ if &background == "dark"
     hi PreProc guibg=bg guifg=#d7a0d7 gui=none
     hi Special guibg=bg guifg=#e8b87e gui=none
     hi Todo guibg=#e0e000 guifg=#000000 gui=none
-    hi Underlined guibg=bg guifg=#00a0ff gui=underline    
+    hi Underlined guibg=bg guifg=#00a0ff gui=underline
 
     if s:moria_fontface == "mixed"
         hi Statement guibg=bg guifg=#7ec0ee gui=bold
@@ -198,7 +198,7 @@ elseif &background == "light"
         hi Visual ctermbg=7 ctermfg=0 guibg=#c1ccdf gui=none
     else
         hi Visual ctermbg=7 ctermfg=0 guibg=#c1ccdf guifg=fg gui=none
-    endif    
+    endif
     hi VisualNOS guibg=bg guifg=#8498bd gui=bold,underline
     hi WarningMsg guibg=bg guifg=#ee2c2c gui=bold
     hi WildMenu guibg=#ffff00 guifg=fg gui=bold

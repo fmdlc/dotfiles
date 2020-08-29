@@ -12,7 +12,7 @@ plugins=(... svn-fast-info)
 It's faster because his efficient use of svn (single svn call) which saves a lot on a huge codebase
 It displays the current status of the local files (added, deleted, modified, replaced, or else...)
 
-Use `svn_prompt_info` method to display the svn repository status in your theme. 
+Use `svn_prompt_info` method to display the svn repository status in your theme.
 
 ## Functions
 

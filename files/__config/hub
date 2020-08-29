@@ -1,0 +1,4 @@
+github.com:
+- user: git
+  oauth_token: <MY-SECURE-TOKEN-HERE>
+  protocol: ssh

@@ -1,11 +1,11 @@
-# The Official Theme of 
-##     ## ##       ##     ## 
-###   ### ##       ##     ## 
-#### #### ##       ##     ## 
-## ### ## ##       ######### 
-##     ## ##       ##     ## 
-##     ## ##       ##     ## 
-##     ## ######## ##     ## 
+# The Official Theme of
+##     ## ##       ##     ##
+###   ### ##       ##     ##
+#### #### ##       ##     ##
+## ### ## ##       #########
+##     ## ##       ##     ##
+##     ## ##       ##     ##
+##     ## ######## ##     ##
 
 # # # # # # # # # # # # # # # # # #
 # # # Feel free to customize! # # #
@@ -28,7 +28,7 @@ username() {
     echo "$USER_COLOR%n%f"
 }
 
-# Returns device name 
+# Returns device name
 device() {
     echo "$DEVICE_COLOR%m%f"
 }

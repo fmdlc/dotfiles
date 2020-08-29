@@ -16,7 +16,7 @@ function pyclean() {
 # Feel free to autorun this when .zshrc loads.
 function pyuserpaths() {
     local targets=("python2" "python3")  # bins
-    
+
     # Get existing interpreters.
     local interps=()
     for target in $targets; do
@@ -34,7 +34,7 @@ function pyuserpaths() {
         # Get minor release version.
         local ver=`$interp -V 2>&1`
         ver=`echo ${ver:7} | cut -d '.' -f 1,2`  # The patch version is variable length, truncate it.
-        
+
         local site_pkgs="${user_base}/lib/python${ver}/site-packages"
         [[ -d $site_pkgs && ! $PYTHONPATH =~ $site_pkgs ]] && export PYTHONPATH=${site_pkgs}:$PYTHONPATH
     done

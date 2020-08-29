@@ -1,6 +1,6 @@
 " Vim color file
 " Maintainer:   Connor Berry <connorberry@yahoo.com>
-" Last Change:	2006/05/25 
+" Last Change:	2006/05/25
 " Version: 1.0
 
 set background=dark
@@ -12,7 +12,7 @@ endif
 let g:colors_name = "redstring"
 
 highlight Normal     term=none ctermfg=grey    cterm=none ctermbg=black  guifg=white    gui=none guibg=black
-highlight Comment    term=none ctermfg=DarkGrey    guifg=DarkGrey    
+highlight Comment    term=none ctermfg=DarkGrey    guifg=DarkGrey
 highlight Constant   term=none ctermfg=red     cterm=none guifg=red     gui=none
 highlight Special    term=none ctermfg=red     cterm=bold guifg=red     gui=bold
 highlight Identifier term=none ctermfg=lightgreen    cterm=none guifg=lightgreen    gui=none

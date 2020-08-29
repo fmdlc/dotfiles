@@ -54,7 +54,7 @@ _ng_completion () {
     t | test )
       opts='--browsers --colors --config-file --environment --filter --host --launch --log-level --module --path --port --query --reporter --server --silent --test-page --test-port --watch -H -c -cf -e -f -m -r -s -tp -w'
       ;;
-      
+
     update )
       opts='--all --dryRun --force --from --migrate-only --next --registry --to -d'
       ;;

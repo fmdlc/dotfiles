@@ -22,7 +22,7 @@ function git-auto-fetch {
 # Override zle-line-init if it exists
 if (( $+functions[zle-line-init] )); then
   eval "override-git-auto-fetch-$(declare -f zle-line-init)"
-  
+
   function zle-line-init () {
     git-fetch-all
     override-git-auto-fetch-zle-line-init
@@ -32,5 +32,5 @@ else
     git-fetch-all
   }
 fi
-  
+
 zle -N zle-line-init

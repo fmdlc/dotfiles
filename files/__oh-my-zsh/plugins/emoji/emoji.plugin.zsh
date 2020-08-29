@@ -22,7 +22,7 @@ unset _omz_emoji_plugin_dir
 
 # This is a combinin character that can be placed after any other character to surround
 # it in a "keycap" symbol.
-# The digits 0-9 are already in the emoji table as keycap_digit_<N>, keycap_ten, etc. 
+# The digits 0-9 are already in the emoji table as keycap_digit_<N>, keycap_ten, etc.
 # It's unclear whether this should be in the $emoji array, because those characters are all ones
 # which can be displayed on their own.
 #emoji[combining_enclosing_keycap]="\U20E3"

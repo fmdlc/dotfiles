@@ -199,7 +199,7 @@ __state() {
       'mv:Move an item in the state'
       'pull:Pull current state and output to stdout'
       'push:Update remote state from a local state file'
-      'rm:Remove instances from the state' 
+      'rm:Remove instances from the state'
       'show:Show a resource in the state'
     )
     _describe -t state "state commands" __state_cmds
@@ -209,7 +209,7 @@ __state_list() {
   _arguments \
     '-state=[(path) Path to a Terraform state file to use to look up Terraform-managed resources. By default it will use the state "terraform.tfstate" if it exists.]' \
     '-id=[(id) Filters the results to include only instances whose resource types have an attribute named id whose value equals the given id string.]' \
-    "*:address:__statelist" 
+    "*:address:__statelist"
 }
 
 __state_mv() {
@@ -223,7 +223,7 @@ __state_mv() {
     "-state-out=[(path) Path to the destination state file to write to. If this isn't specified, the source state file will be used. This can be a new or existing path.]:file:_files" \
     "::" \
     ":source:__statelist" \
-    ":destination: " 
+    ":destination: "
 }
 
 __state_push() {
@@ -242,14 +242,14 @@ __state_rm() {
     "-lock=[(true|false) Lock the state files when locking is supported.]:lock:(true false)" \
     "-lock-timeout=[(seconds) Duration to retry a state lock.]" \
     '-state=[(path) Path to the state file to update. Defaults to the current workspace state.]:file:_files' \
-    "*:address:__statelist" 
+    "*:address:__statelist"
 }
 
 
 __state_show() {
   _arguments \
     '-state=[(path) Path to a Terraform state file to use to look up Terraform-managed resources. By default it will use the state "terraform.tfstate" if it exists.]' \
-    "*:address:__statelist" 
+    "*:address:__statelist"
 }
 
 __statelist() {
@@ -266,7 +266,7 @@ __taint() {
         '-no-color[If specified, output will not contain any color.]' \
         '-state=[(path) Path to read and save state (unless state-out is  specified). Defaults to "terraform.tfstate".]' \
         '-state-out=[(path) Path to write updated state file. By default, the "-state" path will be used.]' \
-        "*:address:__statelist" 
+        "*:address:__statelist"
 }
 
 __untaint() {

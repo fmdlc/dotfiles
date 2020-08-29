@@ -198,7 +198,7 @@ if exists("python_highlight_builtins") && python_highlight_builtins != 0
   syn keyword pythonBuiltinFunc	chr classmethod cmp coerce compile complex
   syn keyword pythonBuiltinFunc	delattr dict dir divmod enumerate eval
   syn keyword pythonBuiltinFunc	execfile file filter float frozenset getattr
-  syn keyword pythonBuiltinfunc globals hasattr hash help hex id 
+  syn keyword pythonBuiltinfunc globals hasattr hash help hex id
   syn keyword pythonBuiltinFunc	input int intern isinstance
   syn keyword pythonBuiltinFunc	issubclass iter len list locals long map max
   syn keyword pythonBuiltinFunc	min object oct open ord pow property range

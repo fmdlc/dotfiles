@@ -4,6 +4,7 @@ set -eo pipefail
 GREEN='\033[1;32m'
 RED='\033[1;31'
 NC='\033[0m'
+DOTFILES="$HOME/dotfiles"
 
 case $1 in
   "--dry-run")
@@ -17,7 +18,10 @@ case $1 in
 esac
 
 shopt -s nullglob
-cd files/ || exit
+
+echo -e "💾 Cloning remote repository.\n"
+git clone git@github.com:fmdlc/dotfiles.git "$DOTFILES"
+cd "$DOTFILES"/files || exit 1
 
 echo -e "💾 Starting file copy.\n"
 

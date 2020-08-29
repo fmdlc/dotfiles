@@ -1,6 +1,6 @@
 {{with .PDoc}}{{/*
 
-Constants 
+Constants
 ---------------------------------------
 
 */}}{{with .Consts}}{{range .}}{{range .Names}}{{.}} {{end}}{{end}}{{end}}{{/*

@@ -34,7 +34,7 @@ if ! type autoenv_init >/dev/null; then
   fi
 
   # Complain if autoenv is not installed
-  if [[ -z $autoenv_dir ]]; then 
+  if [[ -z $autoenv_dir ]]; then
     cat <<END >&2
 -------- AUTOENV ---------
 Could not locate autoenv installation.

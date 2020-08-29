@@ -79,7 +79,7 @@ themes that can be browsed with ${h2}Ctrl-T${rst} and ${h2}Ctrl-G${rst}:
              ${h2}\"magenta/black/1\"${rst} )
 
 It's \"foreground/background/bold\". There's support for 256-color themes
-for Zsh > 5.2, defined like e.g.: 
+for Zsh > 5.2, defined like e.g.:
 
     themes=( ${h2}\"white/17/0\" \"10/17/1\" \"white/24/1\"${rst} )
 

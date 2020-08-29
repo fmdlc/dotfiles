@@ -29,7 +29,7 @@ uninstall:
 	[ -d $(SHARE_DIR)/.config/znt ] && rmdir $(SHARE_DIR)/.config/znt || true
 	[ -d $(SHARE_DIR)/.config ] && rmdir $(SHARE_DIR)/.config || true
 	[ -d $(SHARE_DIR) ] && rmdir $(SHARE_DIR) || true
-	rm -f $(DOC_DIR)/README.md $(DOC_DIR)/LICENSE $(DOC_DIR)/n-history2.png 
+	rm -f $(DOC_DIR)/README.md $(DOC_DIR)/LICENSE $(DOC_DIR)/n-history2.png
 	[ -d $(DOC_DIR) ] && rmdir $(DOC_DIR) || true
 
 .PHONY: all install uninstall

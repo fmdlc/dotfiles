@@ -376,8 +376,8 @@
 "     - Added 'initialInput' option to automatically insert a text at the
 "       beginning of a mode.
 "     - Changed that 'excludedPath' option works for the entire path.
-"     - Renamed some options. 
-"     - Changed default values of some options. 
+"     - Renamed some options.
+"     - Changed default values of some options.
 "     - Packed the mode-specific options to dictionaries.
 "     - Removed some options.
 "
@@ -493,7 +493,7 @@ function! s:FilterEx(in, expr, limit)
   return result
 endfunction
 
-" 
+"
 function! s:FilterMatching(entries, key, pattern, index, limit)
   return s:FilterEx(a:entries, 'v:val[''' . a:key . '''] =~ ' . string(a:pattern) . ' || v:val.index == ' . a:index, a:limit)
 endfunction
@@ -1245,7 +1245,7 @@ function! g:FuzzyFinderMode.Tag.find_tag(pattern, matching_limit)
 
   let key = join(self.tag_files, "\n")
 
-  " cache not created or tags file updated? 
+  " cache not created or tags file updated?
   call extend(self, { 'cache' : {} }, 'keep')
   if !exists('self.cache[key]') || max(map(copy(self.tag_files), 'getftime(v:val) >= self.cache[key].time'))
     echo 'Caching tag list...'
@@ -1279,7 +1279,7 @@ function! g:FuzzyFinderMode.TaggedFile.find_tagged_file(pattern, matching_limit)
 
   let key = join(self.tag_files, "\n")
 
-  " cache not created or tags file updated? 
+  " cache not created or tags file updated?
   call extend(self, { 'cache' : {} }, 'keep')
   if !exists('self.cache[key]') || max(map(copy(self.tag_files), 'getftime(v:val) >= self.cache[key].time'))
     echo 'Caching tagged-file list...'
@@ -1373,7 +1373,7 @@ function! s:InfoFileManager.load()
 
   try
     let lines = readfile(expand(self.get_info_file()))
-  catch /.*/ 
+  catch /.*/
     return
   endtry
 
@@ -1397,7 +1397,7 @@ function! s:InfoFileManager.save()
 
   try
     call writefile(lines, expand(self.get_info_file()))
-  catch /.*/ 
+  catch /.*/
   endtry
 endfunction
 

@@ -1,0 +1,21 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+      - id: trailing-whitespace
+      - id: detect-private-key
+      - id: check-symlinks
+      - id: check-yaml
+      - id: mixed-line-ending
+      - id: pretty-format-json
+        args: [--autofix]
+      - id: requirements-txt-fixer
+      - id: forbid-new-submodules
+  - repo: git://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.34.0
+    hooks:
+      - id: terraform_fmt
+  - repo: https://github.com/fmdlc/pre-commit
+    rev: v0.1.10
+    hooks:
+      - id: helmlint

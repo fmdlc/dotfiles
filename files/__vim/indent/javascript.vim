@@ -1,5 +1,5 @@
 " Vim indent file Language:		JavaScript
-" Author: 		Preston Koprivica (pkopriv2@gmail.com)	
+" Author: 		Preston Koprivica (pkopriv2@gmail.com)
 " URL:
 " Last Change: 	April 30, 2010
 
@@ -44,14 +44,14 @@ let s:syn_comment = '\(Comment\|String\|Regexp\)'
 " = Method: IsInComment
 "
 " Determines whether the specified position is contained in a comment. "Note:
-" This depends on a 
+" This depends on a
 function! s:IsInComment(lnum, cnum)
 	return synIDattr(synID(a:lnum, a:cnum, 1), 'name') =~? s:syn_comment
 endfunction
 
 
 " = Method: IsComment
-" 
+"
 " Determines whether a line is a comment or not.
 function! s:IsComment(lnum)
 	let line = getline(a:lnum)
@@ -89,12 +89,12 @@ function! s:SearchForPair(lnum, beg, end)
 	call cursor(a:lnum, 0)
 
 	" Search for the opening tag
-	let mnum = searchpair(a:beg, '', a:end, 'bW', 
+	let mnum = searchpair(a:beg, '', a:end, 'bW',
 				\ 'synIDattr(synID(line("."), col("."), 0), "name") =~? s:syn_comment' )
 
 	"Restore the cursor position
 	call cursor(curpos)
-	
+
 	" Finally, return the matched line number
 	return mnum
 endfunction
@@ -112,7 +112,7 @@ endfunction
 
 function! s:IsObjectEnd(line)
 	return a:line =~ s:object_end
-endfunction 
+endfunction
 
 function! s:GetObjectBeg(lnum)
 	return s:SearchForPair(a:lnum, '{', '}')
@@ -131,7 +131,7 @@ endfunction
 
 function! s:IsArrayEnd(line)
 	return a:line =~ s:array_end
-endfunction 
+endfunction
 
 function! s:GetArrayBeg(lnum)
 	return s:SearchForPair(a:lnum, '\[', '\]')
@@ -149,7 +149,7 @@ endfunction
 
 function! s:IsParenEnd(line)
 	return a:line =~ s:paren_end
-endfunction 
+endfunction
 
 function! s:GetParenBeg(lnum)
 	return s:SearchForPair(a:lnum, '(', ')')
@@ -159,40 +159,40 @@ endfunction
 
 " Continuation Helpers
 " ====================
-let s:continuation = '\(+\|\\\)\{1}' . s:js_line_comment . '$' 
+let s:continuation = '\(+\|\\\)\{1}' . s:js_line_comment . '$'
 
 function! s:IsContinuationLine(line)
 	return a:line =~ s:continuation
 endfunction
 
-function! s:GetContinuationBegin(lnum) 
+function! s:GetContinuationBegin(lnum)
 	let cur = a:lnum
-	
-	while s:IsContinuationLine(getline(cur)) 
+
+	while s:IsContinuationLine(getline(cur))
 		let cur -= 1
 	endwhile
-	
+
 	return cur + 1
-endfunction 
+endfunction
 
 
 " Switch Helpers
 " ==============
 let s:switch_beg_next_line = 'switch\s*(.*)\s*' . s:js_mid_line_comment . s:js_end_line_comment . '$'
 let s:switch_beg_same_line = 'switch\s*(.*)\s*' . s:js_mid_line_comment . '{\s*' . s:js_line_comment . '$'
-let s:switch_mid = '^.*\(case.*\|default\)\s*:\s*' 
+let s:switch_mid = '^.*\(case.*\|default\)\s*:\s*'
 
-function! s:IsSwitchBeginNextLine(line) 
-	return a:line =~ s:switch_beg_next_line 
+function! s:IsSwitchBeginNextLine(line)
+	return a:line =~ s:switch_beg_next_line
 endfunction
 
-function! s:IsSwitchBeginSameLine(line) 
-	return a:line =~ s:switch_beg_same_line 
+function! s:IsSwitchBeginSameLine(line)
+	return a:line =~ s:switch_beg_same_line
 endfunction
 
 function! s:IsSwitchMid(line)
 	return a:line =~ s:switch_mid
-endfunction 
+endfunction
 
 
 " Control Helpers
@@ -200,8 +200,8 @@ endfunction
 let s:cntrl_beg_keys = '\(\(\(if\|for\|with\|while\)\s*(.*)\)\|\(try\|do\)\)\s*'
 let s:cntrl_mid_keys = '\(\(\(else\s*if\|catch\)\s*(.*)\)\|\(finally\|else\)\)\s*'
 
-let s:cntrl_beg = s:cntrl_beg_keys . s:js_end_line_comment . '$' 
-let s:cntrl_mid = s:cntrl_mid_keys . s:js_end_line_comment . '$' 
+let s:cntrl_beg = s:cntrl_beg_keys . s:js_end_line_comment . '$'
+let s:cntrl_mid = s:cntrl_mid_keys . s:js_end_line_comment . '$'
 
 let s:cntrl_end = '\(while\s*(.*)\)\s*;\=\s*' . s:js_end_line_comment . '$'
 
@@ -259,7 +259,7 @@ function! GetJsIndent(lnum)
 	let ind = indent(pnum)
 
 
-	" Handle: Object Closers (ie }) 
+	" Handle: Object Closers (ie })
 	" =============================
 	if s:IsObjectEnd(line) && !s:IsComment(a:lnum)
 		call s:Log("Line matched object end")
@@ -272,9 +272,9 @@ function! GetJsIndent(lnum)
 		return oind
 	endif
 
-	if s:IsObjectBeg(pline) 
+	if s:IsObjectBeg(pline)
 		call s:Log("Pline matched object beg")
-		return ind + &sw 
+		return ind + &sw
 	endif
 
 
@@ -290,9 +290,9 @@ function! GetJsIndent(lnum)
 		return aind
 	endif
 
-	if s:IsArrayBeg(pline) 
+	if s:IsArrayBeg(pline)
 		call s:Log("Pline matched array beg")
-		return ind + &sw 
+		return ind + &sw
 	endif
 
 	" Handle: Parens
@@ -307,15 +307,15 @@ function! GetJsIndent(lnum)
 		return aind
 	endif
 
-	if s:IsParenBeg(pline) 
+	if s:IsParenBeg(pline)
 		call s:Log("Pline matched paren beg")
-		return ind + &sw 
+		return ind + &sw
 	endif
 
 
-	" Handle: Continuation Lines. 
+	" Handle: Continuation Lines.
 	" ========================================================
-	if s:IsContinuationLine(pline) 
+	if s:IsContinuationLine(pline)
 		call s:Log('Pline is a continuation line.')
 
 		let cbeg = s:GetContinuationBegin(pnum)
@@ -332,7 +332,7 @@ function! GetJsIndent(lnum)
 
 	" Handle: Switch Control Blocks
 	" =============================
-	if s:IsSwitchMid(pline) 
+	if s:IsSwitchMid(pline)
 		call s:Log("PLine matched switch cntrl mid")
 		if s:IsSwitchMid(line) || s:IsObjectEnd(line)
 			call s:Log("Line matched a cntrl mid")
@@ -340,7 +340,7 @@ function! GetJsIndent(lnum)
 		else
 			call s:Log("Line didnt match a cntrl mid")
 			return ind + &sw
-		endif 
+		endif
 	endif
 
 	if s:IsSwitchMid(line)
@@ -348,12 +348,12 @@ function! GetJsIndent(lnum)
 		return ind - &sw
 	endif
 
-	
+
 	" Handle: Single Line Control Blocks
 	" ==================================
 	if s:IsControlBeg(pline)
 		call s:Log("Pline matched control beginning")
-		
+
 		if s:IsControlMid(line)
 			call s:Log("Line matched a control mid")
 			return ind
@@ -363,7 +363,7 @@ function! GetJsIndent(lnum)
 		else
 			return ind + &sw
 		endif
-		
+
 	endif
 
 	if s:IsControlMid(pline)

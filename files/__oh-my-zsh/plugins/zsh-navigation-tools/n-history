@@ -62,7 +62,7 @@ integer active_view=0
 _nhistory_switch_lists_states() {
     # First argument is current, newly selected list, i.e. $active_view
     # This implies that we are switching from previous view
-   
+
     if [ "$1" = "0" ]; then
         # Switched to 1st list, save 3rd list's state
         three_NLIST_FROM_WHAT_IDX_LIST_IS_SHOWN=$NLIST_FROM_WHAT_IDX_LIST_IS_SHOWN

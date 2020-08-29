@@ -16,6 +16,9 @@
 	autocrlf = false
 	pager = diff-so-fancy | less --tabs=4 -RFX
 
+[url "git@github.com:"]
+  insteadOf = https://github.com/
+
 [color]
   ui = true
 
@@ -63,6 +66,9 @@
 [push]
   default = simple
   followTags = true
+
+[fetch]
+  prune = true
 
 [gitsh]
   defaultcommand = status -sb
