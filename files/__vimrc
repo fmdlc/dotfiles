@@ -9,10 +9,11 @@ set backspace=2
 set backspace=indent,eol,start
 set backupdir=/tmp/
 set bg=dark
+set clipboard=unnamed
 set completeopt=longest,menuone
 set copyindent
 set cursorline
-set directory=~/.vim/swap/
+set directory=/tmp/
 set expandtab
 set foldmethod=marker
 set foldnestmax=1
@@ -26,6 +27,7 @@ set nocompatible
 set noerrorbells
 set noerrorbells
 set nu
+set relativenumber
 set scrolloff=3
 set shiftwidth=2
 set showcmd
@@ -34,11 +36,12 @@ set showtabline=2
 set softtabstop=2
 set splitbelow
 set splitright
-set t_ti= t_te=
+set t_te=
+set t_ti=
 set title
 set ts=2
 set ttyfast
-set undodir=$HOME/.vim/undo/
+set undodir=/tmp/
 set undofile
 set undolevels=1000
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.terraform
@@ -71,8 +74,8 @@ let mapleader = ","
 " Specify a directory for plugins
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
-  Plug 'SirVer/ultisnips'
   Plug 'airblade/vim-gitgutter'
+  Plug 'pearofducks/ansible-vim'
   Plug 'bling/vim-bufferline'
   Plug 'davidbeckingsale/writegood.vim'
   Plug 'dhruvasagar/vim-table-mode'
@@ -153,6 +156,9 @@ map <C-p> :Files<CR>
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 " fuzzyfinder
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+" terraform
 let g:terraform_align=1
 let g:terraform_fmt_on_save = 1
 let g:terraform_align = 1
@@ -180,13 +186,29 @@ let NERDTreeDirArrows = 1
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_keep_list_window_open = 0
 let g:ale_lint_on_text_changed = 'never'
-let g:ale_list_window_size = 5
+let g:ale_list_window_size = 2
 let g:ale_open_list = 1
-let g:ale_set_highlights = 0
+let g:ale_set_highlights = 1
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
 let g:indentLine_char = '⦙'
 
+" AutoClose window on exit
+autocmd QuitPre * if empty(&bt) | lclose | endif
+
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? 'OK' : printf(
+    \   '%dW %dE',
+    \   all_non_errors,
+    \   all_errors
+    \)
+endfunction
+
+set statusline=%{LinterStatus()}
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 " Airline
 let g:airline_statusline_ontop=1
@@ -200,23 +222,14 @@ let g:airline#extensions#tabline#keymap_ignored_filetypes = ['vimfiler', 'nerdtr
 let g:airline#extensions#tabline#overflow_marker = '…'
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#show_close_button = 1
-let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#show_splits = 1
 let g:airline#extensions#tabline#show_tab_nr = 0
-let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#show_tab_type = 1
 let g:airline#extensions#tabline#show_tabs = 0
 let g:airline#extensions#tabline#switch_buffers_and_tabs = 0
 let g:airline#extensions#tabline#tabs_label = 't'
 let g:airline#extensions#tabline#ignore_bufadd_pat =
   \ 'gundo|undotree|vimfiler|tagbar|nerd_tree|startify|!'
-
-" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-" Snippets
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 " Mappings
@@ -303,4 +316,9 @@ inoreabbrev <expr> <bar><bar>
 inoreabbrev <expr> __
           \ <SID>isAtStartOfLine('__') ?
           \ '<c-o>:silent! TableModeDisable<cr>' : '__'
-
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+" Ansible plugin
+augroup ansible_vim_fthosts
+  autocmd!
+  autocmd BufNewFile,BufRead hosts setfiletype yaml.ansible
+augroup END
